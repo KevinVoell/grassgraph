@@ -1,0 +1,1 @@
+# Creates a PNG file from Githubs contribution graph
