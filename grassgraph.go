@@ -59,29 +59,26 @@ func getSvgFromGithub(username string) (string, error) {
 }
 
 func extractSVGAndFixup(body string) (string, error) {
-	log.Info("extractSVGAndFixup")
-	log.Info(body)
-
 	repexp := regexp.MustCompile(`^[\s\S]+<svg.+class="js-calendar-graph-svg">`)
 	repcnd := `<svg xmlns="http://www.w3.org/2000/svg" width="870" height="155" class="js-calendar-graph-svg">
 		<rect x="0" y="0" width="828" height="128" fill="white" stroke="none"/>`
 	graphData := repexp.ReplaceAllString(body, repcnd)
 
-	repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none;">Sun</text>`)
-	repcnd = ``
-	graphData = repexp.ReplaceAllString(graphData, repcnd)
+	// repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="8" style="display: none;">Sun</text>`)
+	// repcnd = ``
+	// graphData = repexp.ReplaceAllString(graphData, repcnd)
 
-	repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="32" style="display: none;">Tue</text>`)
-	repcnd = ``
-	graphData = repexp.ReplaceAllString(graphData, repcnd)
+	// repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="32" style="display: none;">Tue</text>`)
+	// repcnd = ``
+	// graphData = repexp.ReplaceAllString(graphData, repcnd)
 
-	repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none;">Thu</text>`)
-	repcnd = ``
-	graphData = repexp.ReplaceAllString(graphData, repcnd)
+	// repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="57" style="display: none;">Thu</text>`)
+	// repcnd = ``
+	// graphData = repexp.ReplaceAllString(graphData, repcnd)
 
-	repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none;">Sat</text>`)
-	repcnd = ``
-	graphData = repexp.ReplaceAllString(graphData, repcnd)
+	// repexp = regexp.MustCompile(`<text text-anchor="start" class="wday" dx="-10" dy="81" style="display: none;">Sat</text>`)
+	// repcnd = ``
+	// graphData = repexp.ReplaceAllString(graphData, repcnd)
 
 	repexp = regexp.MustCompile(`dy="81" style="display: none;">Sat<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[.\s\S]+\z`)
 	repcnd = `dy="81" style="display: none;">Sat</text>
@@ -111,7 +108,6 @@ func extractSVGAndFixup(body string) (string, error) {
 	repcnd = `style="fill:white;stroke:#bcbdc0;stroke-width:1"`
 	graphData = repexp.ReplaceAllString(graphData, repcnd)
 
-	log.Info(graphData)
 	return graphData, nil
 }
 
