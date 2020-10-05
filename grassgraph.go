@@ -59,6 +59,9 @@ func getSvgFromGithub(username string) (string, error) {
 }
 
 func extractSVGAndFixup(body string) (string, error) {
+	log.Info("extractSVGAndFixup")
+	log.Info(body)
+
 	repexp := regexp.MustCompile(`^[\s\S]+<svg.+class="js-calendar-graph-svg">`)
 	repcnd := `<svg xmlns="http://www.w3.org/2000/svg" width="870" height="155" class="js-calendar-graph-svg">
 		<rect x="0" y="0" width="828" height="128" fill="white" stroke="none"/>`
@@ -108,6 +111,7 @@ func extractSVGAndFixup(body string) (string, error) {
 	repcnd = `style="fill:white;stroke:#bcbdc0;stroke-width:1"`
 	graphData = repexp.ReplaceAllString(graphData, repcnd)
 
+	log.Info(graphData)
 	return graphData, nil
 }
 
